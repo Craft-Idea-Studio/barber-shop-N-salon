@@ -1,0 +1,1377 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      /* Mobile menu animations */
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes slideOut {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      .mobile-menu-enter {
+        animation: dropdownIn 0.2s ease-out forwards;
+      }
+      .mobile-menu-leave {
+        animation: dropdownOut 0.15s ease-in forwards;
+      }
+      @keyframes dropdownIn {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes dropdownOut {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+      }
+      .mobile-overlay-enter {
+        animation: fadeIn 0.2s ease-out forwards;
+      }
+      .mobile-overlay-leave {
+        animation: fadeOut 0.2s ease-in forwards;
+      }
+      /* Touch targets */
+      @media (max-width: 1023px) {
+        button,
+        a,
+        [role="button"],
+        input,
+        select,
+        textarea {
+          min-height: 44px;
+          min-width: 44px;
+        }
+      }
+      /* Prevent zoom on input focus */
+      @media screen and (max-width: 768px) {
+        input,
+        select,
+        textarea {
+          font-size: 16px !important;
+        }
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#34343a",
+              error: "#ffb4ab",
+              "on-tertiary": "#2e3039",
+              "on-tertiary-fixed": "#191b23",
+              "secondary-fixed": "#ffdbca",
+              "surface-container-high": "#292a2f",
+              "surface-tint": "#ffb68b",
+              "on-primary-fixed-variant": "#753400",
+              "on-error-container": "#ffdad6",
+              "secondary-fixed-dim": "#ffb690",
+              secondary: "#ffb690",
+              "tertiary-fixed": "#e1e1ed",
+              "on-secondary": "#552100",
+              "tertiary-container": "#9e9faa",
+              "on-surface-variant": "#e0c0af",
+              outline: "#a78b7c",
+              "outline-variant": "#584235",
+              "on-secondary-fixed-variant": "#783200",
+              "secondary-container": "#ec6a06",
+              "on-tertiary-container": "#35363f",
+              "primary-fixed-dim": "#ffb68b",
+              "inverse-on-surface": "#2f3036",
+              "on-background": "#e3e1e9",
+              "primary-container": "#ff7a00",
+              "on-tertiary-fixed-variant": "#454650",
+              "surface-container": "#1e1f25",
+              "error-container": "#93000a",
+              "surface-dim": "#121318",
+              "surface-container-lowest": "#0d0e13",
+              "inverse-primary": "#994700",
+              "surface-variant": "#34343a",
+              primary: "#ffb68b",
+              "on-secondary-container": "#4a1c00",
+              "inverse-surface": "#e3e1e9",
+              "on-surface": "#e3e1e9",
+              "on-primary-fixed": "#321200",
+              tertiary: "#c5c6d1",
+              "surface-container-low": "#1a1b21",
+              "surface-bright": "#38393f",
+              "primary-fixed": "#ffdbc8",
+              "on-error": "#690005",
+              "on-primary-container": "#5c2800",
+              "on-primary": "#522300",
+              surface: "#121318",
+              "on-secondary-fixed": "#341100",
+              "tertiary-fixed-dim": "#c5c6d1",
+              background: "#121318",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "gutter-mobile": "1rem",
+              "gutter-desktop": "2rem",
+              "space-2": "0.5rem",
+              "margin-desktop": "5rem",
+              "gutter-tablet": "1.5rem",
+              "space-6": "1.5rem",
+              "space-12": "3rem",
+              "space-4": "1rem",
+              "space-8": "2rem",
+              "margin-tablet": "2rem",
+              "margin-mobile": "1rem",
+            },
+            fontFamily: {
+              "body-sm": ["Plus Jakarta Sans"],
+              "label-lg": ["Plus Jakarta Sans"],
+              "label-sm": ["Plus Jakarta Sans"],
+              "label-md": ["Plus Jakarta Sans"],
+              "body-md": ["Plus Jakarta Sans"],
+              "headline-md": ["Space Grotesk"],
+              "headline-lg": ["Space Grotesk"],
+              "body-lg": ["Plus Jakarta Sans"],
+              "headline-sm": ["Space Grotesk"],
+            },
+            fontSize: {
+              "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "10px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "headline-md": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-sm": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-on-surface">
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30"
+    >
+      <div
+        class="h-20 max-w-[1440px] mx-auto px-gutter-desktop flex items-center justify-between"
+      >
+        <div class="flex items-center gap-space-4">
+          <img
+            alt="Cutline Logo"
+            class="h-8 w-auto object-contain"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY8bHso0I4rENJyHT3LhkXXdJ_77ZXvLY9cBfD2HeQ2iYbczCvPa_Ul9Sa7Kh8IgCAuQG8cZb_bnlSLL7Sbq7LLv2t6pIDOUrpPPwg77o9zn0zE9kh-gQw92GwOPHmmfO4e_2TXjlHu7pGOzxFTUDXeVtf-5qBS_9OXIYCCfUa62IVeccWufvoLuBSIxIpkRepNxrc-qeu0ABGwhiI9OOQQvhh7glhmkhaxVYuu0BgWYQkme-N-LZx"
+          /><span class="font-headline-sm tracking-widest text-primary"
+            >CUTLINE</span
+          >
+        </div>
+        <nav
+          class="hidden lg:flex items-center gap-space-8"
+          data-active-classes="text-primary font-bold"
+        >
+          <a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="home"
+            href="home.html"
+            >Home</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="services"
+            href="service.html"
+            >Services</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="barbers"
+            href="barber.html"
+            >Barbers</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="gallery"
+            href="home.html#gallery"
+            >Gallery</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="prices"
+            href="service.html"
+            >Prices</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="about"
+            href="prototype.html"
+            >About</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="contact"
+            href="prototype.html"
+            >Contact</a
+          ><a
+            aria-current="page"
+            class="transition-colors text-primary font-bold"
+            data-path="about-project"
+            href="prototype.html"
+            >About Project</a
+          >
+        </nav>
+        <div class="flex items-center gap-space-6">
+          <button
+            aria-label="Cart"
+            class="text-on-surface-variant hover:text-on-surface transition-colors relative lg:hidden p-2"
+          >
+            <span class="material-symbols-outlined text-[28px]"
+              >shopping_bag</span
+            >
+          </button>
+          <a
+            class="hidden sm:inline-flex items-center justify-center px-space-6 py-space-2 bg-primary-container text-on-primary-container font-label-lg rounded-lg hover:shadow-[0_0_24px_rgba(255,122,0,0.4)] transition-all"
+            data-path="book-now"
+            href="#"
+            >Book Now</a
+          >
+          <div
+            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center lg:hidden p-2"
+          >
+            <span class="material-symbols-outlined text-on-primary text-[24px]"
+              >person</span
+            >
+          </div>
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            class="lg:hidden p-2 text-on-surface-variant hover:text-on-surface transition-colors -mr-2"
+          >
+            <span id="menu-icon" class="material-symbols-outlined text-[28px]"
+              >menu</span
+            >
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-overlay"
+        class="fixed inset-0 z-40 bg-black/50 hidden lg:hidden"
+        aria-hidden="true"
+      ></div>
+      <!-- Mobile Menu Panel -->
+      <nav
+        id="mobile-menu"
+        class="absolute top-full right-4 z-50 w-[calc(100%-2rem)] max-w-sm max-h-[calc(100vh-6rem)] bg-surface-container-high border border-outline-variant/30 rounded-b-xl shadow-2xl transform -translate-y-2 opacity-0 pointer-events-none lg:hidden flex flex-col overflow-hidden"
+        aria-label="Mobile navigation"
+        aria-labelledby="mobile-menu-title"
+        aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+        tabindex="-1"
+      >
+        <div
+          class="flex items-center justify-between h-20 px-space-6 border-b border-outline-variant/30"
+        >
+          <span
+            id="mobile-menu-title"
+            class="font-headline-sm tracking-widest text-primary"
+            >CUTLINE</span
+          >
+          <button
+            id="mobile-menu-close"
+            aria-label="Close navigation menu"
+            class="p-2 text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-high"
+          >
+            <span
+              class="material-symbols-outlined text-[28px]"
+              aria-hidden="true"
+              >close</span
+            >
+          </button>
+        </div>
+        <div
+          class="flex-1 overflow-y-auto px-space-6 py-space-6 space-y-space-2"
+        >
+          <a
+            href="home.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface border-b border-outline-variant/20"
+            data-path="home"
+            >Home</a
+          >
+          <a
+            href="service.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="services"
+            >Services</a
+          >
+          <a
+            href="barber.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="barbers"
+            >Barbers</a
+          >
+          <a
+            href="home.html#gallery"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="gallery"
+            >Gallery</a
+          >
+          <a
+            href="service.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="prices"
+            >Prices</a
+          >
+          <a
+            href="prototype.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="about"
+            >About</a
+          >
+          <a
+            href="prototype.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="contact"
+            >Contact</a
+          >
+          <a
+            href="prototype.html"
+            class="block py-space-4 px-space-2 font-label-lg text-primary font-bold border-b border-outline-variant/20"
+            data-path="about-project"
+            >About Project</a
+          >
+        </div>
+        <div
+          class="p-space-6 border-t border-outline-variant/30 space-y-space-4"
+        >
+          <a
+            href="#"
+            class="w-full flex items-center justify-center gap-space-2 px-space-6 py-space-3 bg-primary-container text-on-primary-container font-label-lg rounded-lg hover:shadow-[0_0_24px_rgba(255,122,0,0.4)] transition-all"
+            data-path="book-now"
+            >Book Now
+            <span class="material-symbols-outlined text-[20px]"
+              >arrow_forward</span
+            >
+          </a>
+          <a
+            href="#"
+            class="w-full flex items-center justify-center gap-space-2 px-space-6 py-space-3 bg-surface-container-high text-on-surface font-label-lg rounded-lg hover:bg-surface-container-highest transition-all"
+            data-path="account"
+            >My Account
+            <span class="material-symbols-outlined text-[20px]">person</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main class="w-full pt-20 bg-surface">
+      <div class="flex flex-col w-full">
+        <section
+          class="relative w-full overflow-hidden py-space-12 lg:py-space-12 px-gutter-mobile md:px-gutter-tablet lg:px-margin-desktop"
+        >
+          <div
+            class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[360px] bg-primary-container/10 rounded-full blur-[140px] pointer-events-none"
+          ></div>
+          <div
+            class="absolute -top-10 right-10 w-96 h-96 bg-secondary-container/5 rounded-full blur-[120px] pointer-events-none"
+          ></div>
+          <div
+            class="relative max-w-[1280px] mx-auto flex flex-col items-center text-center"
+          >
+            <div
+              class="inline-flex items-center gap-space-2 px-space-4 py-1.5 rounded-full bg-surface-container-high shadow-lg mb-space-6"
+            >
+              <span class="relative flex h-2.5 w-2.5">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-container"
+                ></span>
+              </span>
+              <span class="font-label-sm uppercase tracking-widest text-primary"
+                >Concept Prototype & Portfolio Piece</span
+              >
+            </div>
+            <a
+              href="https://sites.google.com/view/craft-ideas-studio/home"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block"
+            >
+              <img
+                alt="Box Logo Version 2"
+                class="mt-space-6 w-auto max-w-[300px] h-auto object-contain cursor-pointer hover:opacity-80 transition-opacity"
+                src="BOX LOGO VERSION 2.png"
+              />
+            </a>
+            <h1
+              class="font-headline-lg text-on-surface tracking-tight max-w-4xl leading-[1.1] mb-space-4"
+            >
+              Interactive Prototype &
+              <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-container to-secondary"
+                >Design Credits</span
+              >
+            </h1>
+            <p
+              class="font-body-lg text-on-surface-variant max-w-2xl text-center mb-space-8"
+            >
+              Cutline Barbershop is a fictional design prototype engineered to
+              demonstrate elite digital presence, high-touch luxury
+              interactions, and bespoke UI architecture.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-space-4">
+              <a
+                class="inline-flex items-center gap-space-2 px-space-6 py-space-2 rounded-lg bg-primary-container text-on-primary-container font-label-lg shadow-xl shadow-primary-container/20 hover:shadow-primary-container/40 transition-all"
+                data-path="home"
+                href="#"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_back</span
+                >
+                <span>Explore Prototype</span>
+              </a>
+              <a
+                class="inline-flex items-center gap-space-2 px-space-6 py-space-2 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-bright font-label-lg transition-all"
+                href="https://sites.google.com/view/craft-ideas-studio/home"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>About Craft Idea's Studio</span>
+                <span class="material-symbols-outlined text-[18px]">south</span>
+              </a>
+            </div>
+          </div>
+        </section>
+        <section
+          class="w-full px-gutter-mobile md:px-gutter-tablet lg:px-margin-desktop py-space-8"
+        >
+          <div class="max-w-[1280px] mx-auto">
+            <div
+              class="rounded-xl bg-gradient-to-r from-surface-container via-surface-container-high to-surface-container p-space-6 md:p-space-8 shadow-2xl relative overflow-hidden"
+            >
+              <div
+                class="absolute -right-8 -bottom-8 w-64 h-64 bg-primary-container/10 rounded-full blur-[80px] pointer-events-none"
+              ></div>
+              <div
+                class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-6 relative z-10"
+              >
+                <div class="flex items-start sm:items-center gap-space-4">
+                  <div
+                    class="w-12 h-12 rounded-xl bg-secondary-container/20 flex items-center justify-center flex-shrink-0 text-secondary"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[28px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >gavel</span
+                    >
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-space-2">
+                      <span
+                        class="font-label-sm uppercase tracking-wider text-primary font-bold"
+                        >Important Notice</span
+                      >
+                      <span
+                        class="w-1 h-1 rounded-full bg-outline-variant"
+                      ></span>
+                      <span class="font-label-sm text-tertiary"
+                        >Simulation Environment</span
+                      >
+                    </div>
+                    <p class="font-body-md text-on-surface font-medium mt-0.5">
+                      Zero live commerce transactions or scheduled appointments
+                      are finalized through this interface.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-space-3 w-full sm:w-auto">
+                  <div
+                    class="px-space-4 py-space-2 rounded-lg bg-surface-container-lowest/80 text-on-surface-variant font-label-sm uppercase tracking-wider"
+                  >
+                    Status: Demonstration Only
+                  </div>
+                  <a
+                    class="px-space-4 py-space-2 rounded-lg bg-surface-bright text-on-surface hover:text-primary font-label-sm uppercase tracking-wider transition-colors"
+                    data-path="book-now"
+                    href="#"
+                  >
+                    Test Flow →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          class="w-full px-gutter-mobile md:px-gutter-tablet lg:px-margin-desktop py-space-12"
+          id="studio-profile"
+        >
+          <div class="max-w-[1280px] mx-auto">
+            <div
+              class="rounded-xl bg-surface-container p-space-8 md:p-space-12 shadow-2xl relative overflow-hidden"
+            >
+              <div
+                class="grid grid-cols-1 lg:grid-cols-12 gap-space-8 items-center"
+              >
+                <div class="lg:col-span-7 flex flex-col items-start text-left">
+                  <div class="flex items-center gap-space-2 mb-space-4">
+                    <span
+                      class="font-label-sm uppercase tracking-widest text-primary font-bold"
+                      >Creator Attribution</span
+                    >
+                    <span class="text-outline-variant">•</span>
+                    <span
+                      class="font-label-sm uppercase tracking-widest text-on-surface-variant"
+                      >Design & Engineering</span
+                    >
+                  </div>
+                  <div class="flex items-center gap-space-4 mb-space-4">
+                    <div
+                      class="w-14 h-14 rounded-xl bg-gradient-to-tr from-primary-container to-secondary flex items-center justify-center shadow-lg shadow-primary-container/30 flex-shrink-0"
+                    >
+                      <span
+                        class="material-symbols-outlined text-on-primary-container text-[32px]"
+                        >auto_awesome</span
+                      >
+                    </div>
+                    <div>
+                      <h2
+                        class="font-headline-md text-on-surface tracking-tight"
+                      >
+                        Craft Idea's Studio
+                      </h2>
+                      <p class="font-label-md text-primary">
+                        Creative Design & Digital Experience Architecture
+                      </p>
+                    </div>
+                  </div>
+                  <p
+                    class="font-body-lg text-on-surface-variant mb-space-6 max-w-xl"
+                  >
+                    Crafting bespoke digital identities, cutting-edge UI/UX
+                    architectures, and high-performance interactive web
+                    prototypes that bridge luxury styling with next-generation
+                    design systems.
+                  </p>
+                  <div
+                    class="grid grid-cols-2 sm:grid-cols-4 gap-space-3 w-full mb-space-8"
+                  >
+                    <div class="p-space-4 rounded-lg bg-surface-container-low">
+                      <span
+                        class="material-symbols-outlined text-primary text-[20px] mb-1"
+                        >design_services</span
+                      >
+                      <p class="font-label-md text-on-surface">
+                        UI/UX Strategy
+                      </p>
+                      <p class="font-body-sm text-tertiary">
+                        Product Architecture
+                      </p>
+                    </div>
+                    <div class="p-space-4 rounded-lg bg-surface-container-low">
+                      <span
+                        class="material-symbols-outlined text-primary text-[20px] mb-1"
+                        >palette</span
+                      >
+                      <p class="font-label-md text-on-surface">
+                        Visual Identity
+                      </p>
+                      <p class="font-body-sm text-tertiary">
+                        Dark Luxe Aesthetics
+                      </p>
+                    </div>
+                    <div class="p-space-4 rounded-lg bg-surface-container-low">
+                      <span
+                        class="material-symbols-outlined text-primary text-[20px] mb-1"
+                        >layers</span
+                      >
+                      <p class="font-label-md text-on-surface">
+                        Design Systems
+                      </p>
+                      <p class="font-body-sm text-tertiary">Tokenized Specs</p>
+                    </div>
+                    <div class="p-space-4 rounded-lg bg-surface-container-low">
+                      <span
+                        class="material-symbols-outlined text-primary text-[20px] mb-1"
+                        >touch_app</span
+                      >
+                      <p class="font-label-md text-on-surface">Prototyping</p>
+                      <p class="font-body-sm text-tertiary">
+                        Fluid Interactions
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-space-4">
+                    <button
+                      class="px-space-6 py-space-2 rounded-lg bg-primary-container text-on-primary-container font-label-lg shadow-lg shadow-primary-container/30 hover:shadow-primary-container/50 transition-all flex items-center gap-space-2"
+                      onclick="
+                        document
+                          .getElementById('contact-modal')
+                          .classList.remove('hidden')
+                      "
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >mail</span
+                      >
+                      <span>Hire Craft Idea's Studio</span>
+                    </button>
+                    <a
+                      class="px-space-6 py-space-2 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-bright font-label-lg transition-colors flex items-center gap-space-2"
+                      data-path="about-project"
+                      href="https://sites.google.com/view/craft-ideas-studio/home"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >launch</span
+                      >
+                      <span>Studio Portfolio</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="lg:col-span-5 flex flex-col gap-space-4">
+                  <div
+                    class="relative rounded-xl overflow-hidden shadow-2xl bg-surface-container-lowest p-space-6"
+                  >
+                    <div class="flex items-center justify-between mb-space-4">
+                      <span class="font-label-md text-on-surface"
+                        >System Performance</span
+                      >
+                      <span
+                        class="font-label-sm px-2 py-0.5 rounded bg-primary-container/20 text-primary"
+                        >v1.2.0-STABLE</span
+                      >
+                    </div>
+                    <div class="space-y-space-4">
+                      <div>
+                        <div
+                          class="flex justify-between font-label-sm text-on-surface-variant mb-1"
+                        >
+                          <span>Design Token Coverage</span>
+                          <span class="text-primary font-bold">100%</span>
+                        </div>
+                        <div
+                          class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden"
+                        >
+                          <div
+                            class="h-full bg-gradient-to-r from-primary-container to-primary rounded-full"
+                            style="width: 100%"
+                          ></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          class="flex justify-between font-label-sm text-on-surface-variant mb-1"
+                        >
+                          <span>Dark Luxe Contrast Compliance</span>
+                          <span class="text-primary font-bold">98.4%</span>
+                        </div>
+                        <div
+                          class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden"
+                        >
+                          <div
+                            class="h-full bg-gradient-to-r from-primary-container to-secondary rounded-full"
+                            style="width: 98.4%"
+                          ></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          class="flex justify-between font-label-sm text-on-surface-variant mb-1"
+                        >
+                          <span>Micro-Interaction Polish</span>
+                          <span class="text-primary font-bold">96.8%</span>
+                        </div>
+                        <div
+                          class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden"
+                        >
+                          <div
+                            class="h-full bg-gradient-to-r from-primary-container to-primary rounded-full"
+                            style="width: 96.8%"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="mt-space-6 pt-space-4 flex items-center justify-between text-on-surface-variant font-label-sm"
+                    >
+                      <span>Architecture: Pure Semantic Modular</span>
+                      <span class="flex items-center gap-1 text-primary">
+                        <span class="material-symbols-outlined text-[16px]"
+                          >verified</span
+                        >
+                        Audited
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="rounded-xl bg-surface-container-high p-space-4 flex items-center gap-space-4"
+                  >
+                    <div
+                      class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary"
+                    >
+                      <span class="material-symbols-outlined">badge</span>
+                    </div>
+                    <div>
+                      <p class="font-label-md text-on-surface">
+                        Client Collaborations
+                      </p>
+                      <p class="font-body-sm text-tertiary">
+                        Accepting bespoke editorial, brand, and web ventures for
+                        2025.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          class="w-full px-gutter-mobile md:px-gutter-tablet lg:px-margin-desktop py-space-12"
+        >
+          <div class="max-w-[1280px] mx-auto">
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between mb-space-8"
+            >
+              <div>
+                <span
+                  class="font-label-sm uppercase tracking-widest text-primary font-bold"
+                  >Transparency & Governance</span
+                >
+                <h2
+                  class="font-headline-md text-on-surface tracking-tight mt-1"
+                >
+                  Prototype Disclaimers & Terms
+                </h2>
+              </div>
+              <p
+                class="font-body-md text-on-surface-variant max-w-md mt-2 md:mt-0"
+              >
+                Everything you need to know about the fictional context,
+                technical stack, and IP behind this showcase.
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-6"
+            >
+              <div
+                class="rounded-xl bg-surface-container-high p-space-6 flex flex-col justify-between shadow-xl"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-space-4"
+                  >
+                    <span class="material-symbols-outlined text-[24px]"
+                      >corporate_fare</span
+                    >
+                  </div>
+                  <h3
+                    class="font-headline-sm text-on-surface text-[20px] mb-space-2"
+                  >
+                    Fictional Entity
+                  </h3>
+                  <p
+                    class="font-body-md text-on-surface-variant leading-relaxed"
+                  >
+                    "Cutline Barbershop", its service catalogue, pricing index,
+                    and professional barber profiles are creative demonstration
+                    constructs developed for portfolio presentation.
+                  </p>
+                </div>
+                <div
+                  class="mt-space-6 pt-space-4 flex items-center gap-space-2 text-tertiary font-label-sm"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >info</span
+                  >
+                  <span>Non-Commercial Concept</span>
+                </div>
+              </div>
+              <div
+                class="rounded-xl bg-surface-container-high p-space-6 flex flex-col justify-between shadow-xl"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-space-4"
+                  >
+                    <span class="material-symbols-outlined text-[24px]"
+                      >credit_card_off</span
+                    >
+                  </div>
+                  <h3
+                    class="font-headline-sm text-on-surface text-[20px] mb-space-2"
+                  >
+                    Zero Transactions
+                  </h3>
+                  <p
+                    class="font-body-md text-on-surface-variant leading-relaxed"
+                  >
+                    All checkout flows, scheduling datepickers, credit card
+                    prompts, and confirmations are visual sandbox simulations.
+                    No personal bank funds or card numbers are collected or
+                    charged.
+                  </p>
+                </div>
+                <div
+                  class="mt-space-6 pt-space-4 flex items-center gap-space-2 text-tertiary font-label-sm"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >lock_clock</span
+                  >
+                  <span>Simulated Checkout</span>
+                </div>
+              </div>
+              <div
+                class="rounded-xl bg-surface-container-high p-space-6 flex flex-col justify-between shadow-xl"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-space-4"
+                  >
+                    <span class="material-symbols-outlined text-[24px]"
+                      >copyright</span
+                    >
+                  </div>
+                  <h3
+                    class="font-headline-sm text-on-surface text-[20px] mb-space-2"
+                  >
+                    Intellectual Property
+                  </h3>
+                  <p
+                    class="font-body-md text-on-surface-variant leading-relaxed"
+                  >
+                    Original brand identity, bespoke layout design, visual
+                    design tokens, and frontend code are authored by Craft
+                    Idea's Studio. All rights and design authorship strictly
+                    reserved.
+                  </p>
+                </div>
+                <div
+                  class="mt-space-6 pt-space-4 flex items-center gap-space-2 text-tertiary font-label-sm"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >shield_person</span
+                  >
+                  <span>© Craft Idea's Studio</span>
+                </div>
+              </div>
+              <div
+                class="rounded-xl bg-surface-container-high p-space-6 flex flex-col justify-between shadow-xl"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-space-4"
+                  >
+                    <span class="material-symbols-outlined text-[24px]"
+                      >code</span
+                    >
+                  </div>
+                  <h3
+                    class="font-headline-sm text-on-surface text-[20px] mb-space-2"
+                  >
+                    Technical Engine
+                  </h3>
+                  <p
+                    class="font-body-md text-on-surface-variant leading-relaxed"
+                  >
+                    Constructed with clean semantic HTML5, high-contrast
+                    Tailwind design tokens, modern typography pairings, and
+                    micro-interaction scripts optimized for instant rendering.
+                  </p>
+                </div>
+                <div
+                  class="mt-space-6 pt-space-4 flex items-center gap-space-2 text-tertiary font-label-sm"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >bolt</span
+                  >
+                  <span>Zero Runtime Latency</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          class="w-full px-gutter-mobile md:px-gutter-tablet lg:px-margin-desktop py-space-12"
+        >
+          <div
+            class="max-w-[1280px] mx-auto rounded-xl bg-surface-container-low p-space-8 md:p-space-12 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-space-8"
+          >
+            <div>
+              <span
+                class="font-label-sm uppercase tracking-widest text-primary font-bold"
+                >Interactive Discovery</span
+              >
+              <h3 class="font-headline-md text-on-surface tracking-tight mt-1">
+                Experience the Prototype in Action
+              </h3>
+              <p class="font-body-md text-on-surface-variant mt-2 max-w-xl">
+                Navigate through the customer journey to inspect the luxury
+                service menu, master groomers directory, or the bespoke
+                appointment booking experience.
+              </p>
+            </div>
+            <div
+              class="flex flex-wrap items-center gap-space-4 w-full lg:w-auto justify-start lg:justify-end"
+            >
+              <a
+                class="px-space-6 py-space-2 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-bright font-label-lg transition-colors flex items-center gap-space-2"
+                data-path="home"
+                href="#"
+              >
+                <span class="material-symbols-outlined text-[18px]">home</span>
+                <span>Homepage</span>
+              </a>
+              <a
+                class="px-space-6 py-space-2 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-bright font-label-lg transition-colors flex items-center gap-space-2"
+                data-path="services"
+                href="#"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >content_cut</span
+                >
+                <span>Services & Pricing</span>
+              </a>
+              <a
+                class="px-space-6 py-space-2 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-bright font-label-lg transition-colors flex items-center gap-space-2"
+                data-path="barbers"
+                href="#"
+              >
+                <span class="material-symbols-outlined text-[18px]">group</span>
+                <span>Barber Team</span>
+              </a>
+              <a
+                class="px-space-6 py-space-2 rounded-lg bg-primary-container text-on-primary-container font-label-lg shadow-lg shadow-primary-container/20 hover:shadow-primary-container/40 transition-all flex items-center gap-space-2"
+                data-path="book-now"
+                href="#"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >calendar_month</span
+                >
+                <span>Launch Booking Flow</span>
+              </a>
+            </div>
+          </div>
+        </section>
+        <div
+          class="fixed inset-0 z-50 flex items-center justify-center p-space-4 bg-surface-container-lowest/80 backdrop-blur-md hidden"
+          id="contact-modal"
+        >
+          <div
+            class="relative w-full max-w-lg rounded-xl bg-surface-container-high p-space-8 shadow-2xl"
+          >
+            <button
+              class="absolute top-space-4 right-space-4 text-on-surface-variant hover:text-on-surface"
+              onclick="
+                document.getElementById('contact-modal').classList.add('hidden')
+              "
+            >
+              <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="flex items-center gap-space-3 mb-space-4">
+              <div
+                class="w-10 h-10 rounded-lg bg-primary-container/20 text-primary flex items-center justify-center"
+              >
+                <span class="material-symbols-outlined">outgoing_mail</span>
+              </div>
+              <div>
+                <h4 class="font-headline-sm text-on-surface text-[20px]">
+                  Craft Idea's Studio
+                </h4>
+                <p class="font-label-sm text-primary">
+                  Inquiries & Project Commissions
+                </p>
+              </div>
+            </div>
+            <p class="font-body-md text-on-surface-variant mb-space-6">
+              Ready to elevate your luxury digital footprint with bespoke UX and
+              visual presence? Send a dispatch directly to our studio team.
+            </p>
+            <form
+              class="space-y-space-4"
+              onsubmit="
+                event.preventDefault();
+                alert(
+                  'Demo Inquiry Sent! In production this connects to Craft Idea\'s Studio concierge.',
+                );
+                document
+                  .getElementById('contact-modal')
+                  .classList.add('hidden');
+              "
+            >
+              <div>
+                <label
+                  class="block font-label-sm uppercase tracking-wider text-on-surface-variant mb-1"
+                  >Your Name or Brand</label
+                >
+                <input
+                  class="w-full px-space-4 py-space-2 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary font-body-md"
+                  placeholder="e.g. Sterling Lifestyle Group"
+                  required=""
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block font-label-sm uppercase tracking-wider text-on-surface-variant mb-1"
+                  >Direct Email</label
+                >
+                <input
+                  class="w-full px-space-4 py-space-2 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary font-body-md"
+                  placeholder="name@company.com"
+                  required=""
+                  type="email"
+                />
+              </div>
+              <div>
+                <label
+                  class="block font-label-sm uppercase tracking-wider text-on-surface-variant mb-1"
+                  >Project Brief</label
+                >
+                <textarea
+                  class="w-full px-space-4 py-space-2 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary font-body-md"
+                  placeholder="Tell us about your brand vision, timeline, and deliverables..."
+                  required=""
+                  rows="3"
+                ></textarea>
+              </div>
+              <button
+                class="w-full py-space-2 rounded-lg bg-primary-container text-on-primary-container font-label-lg shadow-lg hover:shadow-primary-container/40 transition-all"
+                type="submit"
+              >
+                Transmit Brief to Studio
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="w-full bg-surface-container-lowest border-t border-outline-variant/30 py-space-12"
+    >
+      <div
+        class="max-w-[1440px] mx-auto px-gutter-desktop grid grid-cols-1 md:grid-cols-4 gap-space-8 mb-space-12"
+      >
+        <div class="space-y-space-4">
+          <div class="flex items-center gap-space-4">
+            <img
+              alt="Cutline Logo"
+              class="h-6 w-auto object-contain"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY8bHso0I4rENJyHT3LhkXXdJ_77ZXvLY9cBfD2HeQ2iYbczCvPa_Ul9Sa7Kh8IgCAuQG8cZb_bnlSLL7Sbq7LLv2t6pIDOUrpPPwg77o9zn0zE9kh-gQw92GwOPHmmfO4e_2TXjlHu7pGOzxFTUDXeVtf-5qBS_9OXIYCCfUa62IVeccWufvoLuBSIxIpkRepNxrc-qeu0ABGwhiI9OOQQvhh7glhmkhaxVYuu0BgWYQkme-N-LZx"
+            /><span class="font-headline-sm text-primary">CUTLINE</span>
+          </div>
+          <p class="font-body-sm text-on-surface-variant">
+            The pinnacle of modern grooming and elite styling experiences.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-label-lg text-on-surface mb-space-4">Navigation</h4>
+          <ul class="space-y-space-2 font-body-sm text-on-surface-variant">
+            <li>
+              <a
+                class="hover:text-primary transition-colors"
+                data-path="services"
+                href="#"
+                >Services & Pricing</a
+              >
+            </li>
+            <li>
+              <a
+                class="hover:text-primary transition-colors"
+                data-path="barbers"
+                href="#"
+                >Meet the Barbers</a
+              >
+            </li>
+            <li>
+              <a
+                class="hover:text-primary transition-colors"
+                data-path="gallery"
+                href="#"
+                >Gallery</a
+              >
+            </li>
+            <li>
+              <a
+                class="hover:text-primary transition-colors"
+                data-path="book-now"
+                href="#"
+                >Book Appointment</a
+              >
+            </li>
+            <li>
+              <a
+                class="hover:text-primary transition-colors"
+                data-path="about-project"
+                href="#"
+                >Disclaimer / Prototype</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-label-lg text-on-surface mb-space-4">Hours</h4>
+          <ul class="space-y-space-2 font-body-sm text-on-surface-variant">
+            <li>Mon - Fri: 9am - 8pm</li>
+            <li>Saturday: 8am - 7pm</li>
+            <li>Sunday: 10am - 5pm</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-label-lg text-on-surface mb-space-4">Location</h4>
+          <p class="font-body-sm text-on-surface-variant mb-space-2">
+            123 Luxury Ave, Suite 400<br />Metropolis, NY 10001
+          </p>
+          <p class="font-body-sm text-primary">concierge@cutlinebarbers.com</p>
+        </div>
+      </div>
+      <div
+        class="max-w-[1440px] mx-auto px-gutter-desktop pt-space-8 border-t border-outline-variant/20 flex flex-col md:flex-row items-center justify-between font-body-sm text-on-surface-variant"
+      >
+        <div class="flex flex-col sm:flex-row sm:items-center gap-space-2">
+          <p>© 2024 Cutline Barbershop. All rights reserved.</p>
+          <span class="hidden sm:inline text-outline-variant">|</span>
+          <p>
+            Crafted & Conceptualized by
+            <a
+              class="text-primary hover:underline font-label-md"
+              data-path="about-project"
+              href="https://sites.google.com/view/craft-ideas-studio/home"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Craft Idea's Studio</a
+            >
+          </p>
+        </div>
+        <div class="flex gap-space-6 mt-space-4 md:mt-0">
+          <a
+            class="hover:text-primary transition-colors"
+            data-path="about-project"
+            href="#"
+            >Disclaimer / Prototype</a
+          ><a class="hover:text-primary" href="#">Privacy Policy</a
+          ><a class="hover:text-primary" href="#">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Mobile Navigation Menu
+      (function () {
+        const menuBtn = document.getElementById("mobile-menu-btn");
+        const menuClose = document.getElementById("mobile-menu-close");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileOverlay = document.getElementById("mobile-overlay");
+        const menuIcon = document.getElementById("menu-icon");
+        const body = document.body;
+        let lastFocusedElement = null;
+        let focusableElements = [];
+
+        function openMenu() {
+          lastFocusedElement = document.activeElement;
+          mobileMenu.setAttribute("aria-hidden", "false");
+          mobileMenu.classList.remove("translate-x-full");
+          mobileMenu.classList.remove(
+            "-translate-y-2",
+            "opacity-0",
+            "pointer-events-none",
+          );
+          mobileMenu.classList.add("mobile-menu-enter");
+          mobileOverlay.classList.remove("hidden");
+          mobileOverlay.classList.add("mobile-overlay-enter");
+          menuBtn.setAttribute("aria-expanded", "true");
+          mobileOverlay.setAttribute("aria-hidden", "false");
+          menuIcon.textContent = "close";
+          body.style.overflow = "hidden";
+          focusableElements = mobileMenu.querySelectorAll(
+            "a[href], button:not([disabled])",
+          );
+          if (focusableElements.length) focusableElements[0].focus();
+        }
+
+        function closeMenu() {
+          mobileMenu.classList.remove("mobile-menu-enter");
+          mobileMenu.classList.add("mobile-menu-leave");
+          mobileOverlay.classList.remove("mobile-overlay-enter");
+          mobileOverlay.classList.add("mobile-overlay-leave");
+          menuBtn.setAttribute("aria-expanded", "false");
+          mobileOverlay.setAttribute("aria-hidden", "true");
+          menuIcon.textContent = "menu";
+          body.style.overflow = "";
+          mobileMenu.setAttribute("aria-hidden", "true");
+          setTimeout(() => {
+            mobileMenu.classList.add("translate-x-full");
+            mobileMenu.classList.add(
+              "-translate-y-2",
+              "opacity-0",
+              "pointer-events-none",
+            );
+            mobileMenu.classList.remove("mobile-menu-leave");
+            mobileOverlay.classList.add("hidden");
+            mobileOverlay.classList.remove("mobile-overlay-leave");
+            if (lastFocusedElement) lastFocusedElement.focus();
+          }, 200);
+        }
+
+        menuBtn.addEventListener("click", openMenu);
+        menuClose.addEventListener("click", closeMenu);
+        mobileOverlay.addEventListener("click", closeMenu);
+
+        // Close menu when clicking a link
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", closeMenu);
+        });
+
+        // Close menu on escape key
+        document.addEventListener("keydown", (e) => {
+          if (
+            e.key === "Tab" &&
+            mobileMenu.getAttribute("aria-hidden") === "false"
+          ) {
+            focusableElements = mobileMenu.querySelectorAll(
+              "a[href], button:not([disabled])",
+            );
+            const first = focusableElements[0];
+            const last = focusableElements[focusableElements.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+          if (
+            e.key === "Escape" &&
+            !mobileMenu.classList.contains("translate-x-full")
+          ) {
+            closeMenu();
+          }
+        });
+
+        // Handle resize
+        window.addEventListener("resize", () => {
+          if (
+            window.innerWidth >= 1024 &&
+            !mobileMenu.classList.contains("translate-x-full")
+          ) {
+            closeMenu();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

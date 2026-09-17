@@ -1,0 +1,1927 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      /* Mobile menu animations */
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes slideOut {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      .mobile-menu-enter {
+        animation: dropdownIn 0.2s ease-out forwards;
+      }
+      .mobile-menu-leave {
+        animation: dropdownOut 0.15s ease-in forwards;
+      }
+      @keyframes dropdownIn {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes dropdownOut {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+      }
+      .mobile-overlay-enter {
+        animation: fadeIn 0.2s ease-out forwards;
+      }
+      .mobile-overlay-leave {
+        animation: fadeOut 0.2s ease-in forwards;
+      }
+      /* Touch targets */
+      @media (max-width: 1023px) {
+        button,
+        a,
+        [role="button"],
+        input,
+        select,
+        textarea {
+          min-height: 44px;
+          min-width: 44px;
+        }
+      }
+      /* Prevent zoom on input focus */
+      @media screen and (max-width: 768px) {
+        input,
+        select,
+        textarea {
+          font-size: 16px !important;
+        }
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#34343a",
+              error: "#ffb4ab",
+              "on-tertiary": "#2e3039",
+              "on-tertiary-fixed": "#191b23",
+              "secondary-fixed": "#ffdbca",
+              "surface-container-high": "#292a2f",
+              "surface-tint": "#ffb68b",
+              "on-primary-fixed-variant": "#753400",
+              "on-error-container": "#ffdad6",
+              "secondary-fixed-dim": "#ffb690",
+              secondary: "#ffb690",
+              "tertiary-fixed": "#e1e1ed",
+              "on-secondary": "#552100",
+              "tertiary-container": "#9e9faa",
+              "on-surface-variant": "#e0c0af",
+              outline: "#a78b7c",
+              "outline-variant": "#584235",
+              "on-secondary-fixed-variant": "#783200",
+              "secondary-container": "#ec6a06",
+              "on-tertiary-container": "#35363f",
+              "primary-fixed-dim": "#ffb68b",
+              "inverse-on-surface": "#2f3036",
+              "on-background": "#e3e1e9",
+              "primary-container": "#ff7a00",
+              "on-tertiary-fixed-variant": "#454650",
+              "surface-container": "#1e1f25",
+              "error-container": "#93000a",
+              "surface-dim": "#121318",
+              "surface-container-lowest": "#0d0e13",
+              "inverse-primary": "#994700",
+              "surface-variant": "#34343a",
+              primary: "#ffb68b",
+              "on-secondary-container": "#4a1c00",
+              "inverse-surface": "#e3e1e9",
+              "on-surface": "#e3e1e9",
+              "on-primary-fixed": "#321200",
+              tertiary: "#c5c6d1",
+              "surface-container-low": "#1a1b21",
+              "surface-bright": "#38393f",
+              "primary-fixed": "#ffdbc8",
+              "on-error": "#690005",
+              "on-primary-container": "#5c2800",
+              "on-primary": "#522300",
+              surface: "#121318",
+              "on-secondary-fixed": "#341100",
+              "tertiary-fixed-dim": "#c5c6d1",
+              background: "#121318",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "gutter-mobile": "1rem",
+              "gutter-desktop": "2rem",
+              "space-2": "0.5rem",
+              "margin-desktop": "5rem",
+              "gutter-tablet": "1.5rem",
+              "space-6": "1.5rem",
+              "space-12": "3rem",
+              "space-4": "1rem",
+              "space-8": "2rem",
+              "margin-tablet": "2rem",
+              "margin-mobile": "1rem",
+            },
+            fontFamily: {
+              "body-sm": ["Plus Jakarta Sans"],
+              "label-lg": ["Plus Jakarta Sans"],
+              "label-sm": ["Plus Jakarta Sans"],
+              "label-md": ["Plus Jakarta Sans"],
+              "body-md": ["Plus Jakarta Sans"],
+              "headline-md": ["Space Grotesk"],
+              "headline-lg": ["Space Grotesk"],
+              "body-lg": ["Plus Jakarta Sans"],
+              "headline-sm": ["Space Grotesk"],
+            },
+            fontSize: {
+              "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+              "label-lg": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "10px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "headline-md": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-sm": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-surface font-body-md text-on-surface">
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30"
+    >
+      <div
+        class="h-20 max-w-[1440px] mx-auto px-gutter-desktop flex items-center justify-between"
+      >
+        <div class="flex items-center gap-space-4">
+          <img
+            alt="Cutline Logo"
+            class="h-8 w-auto object-contain"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY8bHso0I4rENJyHT3LhkXXdJ_77ZXvLY9cBfD2HeQ2iYbczCvPa_Ul9Sa7Kh8IgCAuQG8cZb_bnlSLL7Sbq7LLv2t6pIDOUrpPPwg77o9zn0zE9kh-gQw92GwOPHmmfO4e_2TXjlHu7pGOzxFTUDXeVtf-5qBS_9OXIYCCfUa62IVeccWufvoLuBSIxIpkRepNxrc-qeu0ABGwhiI9OOQQvhh7glhmkhaxVYuu0BgWYQkme-N-LZx"
+          /><span class="font-headline-sm tracking-widest text-primary"
+            >CUTLINE</span
+          >
+        </div>
+        <nav
+          class="hidden lg:flex items-center gap-space-8"
+          data-active-classes="text-primary font-bold"
+        >
+          <a
+            aria-current="page"
+            class="transition-colors text-primary font-bold"
+            data-path="home"
+            href="home.html"
+            >Home</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="services"
+            href="service.html"
+            >Services</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="barbers"
+            href="barber.html"
+            >Barbers</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="gallery"
+            href="home.html#gallery"
+            >Gallery</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="prices"
+            href="service.html"
+            >Prices</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="about"
+            href="prototype.html"
+            >About</a
+          ><a
+            class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="contact"
+            href="prototype.html"
+            >Contact</a
+          ><a
+            aria-current="page"
+            class="transition-colors text-primary font-bold"
+            data-path="about-project"
+            href="prototype.html"
+            >About Project</a
+          >
+        </nav>
+        <div class="flex items-center gap-space-6">
+          <button
+            aria-label="Cart"
+            class="text-on-surface-variant hover:text-on-surface transition-colors relative lg:hidden p-2"
+          >
+            <span class="material-symbols-outlined text-[28px]"
+              >shopping_bag</span
+            >
+          </button>
+          <a
+            class="hidden sm:inline-flex items-center justify-center px-space-6 py-space-2 bg-primary-container text-on-primary-container font-label-lg rounded-lg hover:shadow-[0_0_24px_rgba(255,122,0,0.4)] transition-all"
+            data-path="book-now"
+            href="#"
+            >Book Now</a
+          >
+          <div
+            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center lg:hidden p-2"
+          >
+            <span class="material-symbols-outlined text-on-primary text-[24px]"
+              >person</span
+            >
+          </div>
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            class="lg:hidden p-2 text-on-surface-variant hover:text-on-surface transition-colors -mr-2"
+          >
+            <span id="menu-icon" class="material-symbols-outlined text-[28px]"
+              >menu</span
+            >
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-overlay"
+        class="fixed inset-0 z-40 bg-black/50 hidden lg:hidden"
+        aria-hidden="true"
+      ></div>
+      <!-- Mobile Menu Panel -->
+      <nav
+        id="mobile-menu"
+        class="absolute top-full right-4 z-50 w-[calc(100%-2rem)] max-w-sm max-h-[calc(100vh-6rem)] bg-surface-container-high border border-outline-variant/30 rounded-b-xl shadow-2xl transform -translate-y-2 opacity-0 pointer-events-none lg:hidden flex flex-col overflow-hidden"
+        aria-label="Mobile navigation"
+        role="dialog"
+        aria-modal="true"
+        tabindex="-1"
+        aria-labelledby="mobile-menu-title"
+        aria-hidden="true"
+      >
+        <div
+          class="flex items-center justify-between h-20 px-space-6 border-b border-outline-variant/30"
+        >
+          <h2
+            id="mobile-menu-title"
+            class="font-headline-sm tracking-widest text-primary"
+          >
+            CUTLINE
+          </h2>
+          <button
+            id="mobile-menu-close"
+            aria-label="Close navigation menu"
+            class="p-2 text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-high"
+          >
+            <span
+              class="material-symbols-outlined text-[28px]"
+              aria-hidden="true"
+              >close</span
+            >
+          </button>
+        </div>
+        <div
+          class="flex-1 overflow-y-auto px-space-6 py-space-6 space-y-space-2"
+        >
+          <a
+            href="home.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface border-b border-outline-variant/20"
+            data-path="home"
+            >Home</a
+          >
+          <a
+            href="service.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="services"
+            >Services</a
+          >
+          <a
+            href="barber.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="barbers"
+            >Barbers</a
+          >
+          <a
+            href="home.html#gallery"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="gallery"
+            >Gallery</a
+          >
+          <a
+            href="service.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="prices"
+            >Prices</a
+          >
+          <a
+            href="prototype.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="about"
+            >About</a
+          >
+          <a
+            href="prototype.html"
+            class="block py-space-4 px-space-2 font-label-lg text-on-surface-variant border-b border-outline-variant/20"
+            data-path="contact"
+            >Contact</a
+          >
+          <a
+            href="prototype.html"
+            class="block py-space-4 px-space-2 font-label-lg text-primary font-bold border-b border-outline-variant/20"
+            data-path="about-project"
+            >About Project</a
+          >
+        </div>
+        <div
+          class="p-space-6 border-t border-outline-variant/30 space-y-space-4"
+        >
+          <a
+            href="#"
+            class="w-full flex items-center justify-center gap-space-2 px-space-6 py-space-3 bg-primary-container text-on-primary-container font-label-lg rounded-lg hover:shadow-[0_0_24px_rgba(255,122,0,0.4)] transition-all"
+            data-path="book-now"
+            >Book Now
+            <span class="material-symbols-outlined text-[20px]"
+              >arrow_forward</span
+            >
+          </a>
+          <a
+            href="#"
+            class="w-full flex items-center justify-center gap-space-2 px-space-6 py-space-3 bg-surface-container-high text-on-surface font-label-lg rounded-lg hover:bg-surface-container-highest transition-all"
+            data-path="account"
+            >My Account
+            <span class="material-symbols-outlined text-[20px]">person</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main class="w-full pt-20 bg-surface">
+      <div class="flex flex-col w-full text-on-surface">
+        <!-- Hero Section with Booking Widget -->
+        <section
+          class="relative w-full min-h-[870px] flex items-center pt-12 pb-20 px-gutter-desktop overflow-hidden -mt-20"
+        >
+          <!-- Background Image with Dark Gradient Scrim -->
+          <div
+            class="absolute inset-0 bg-cover bg-center z-0"
+            data-alt="A moody, high-end modern barbershop interior with warm amber neon lighting, dark charcoal walls, and a professional barber in a black apron precisely styling a client's hair with intense focus. Cinematic atmosphere, dramatic lighting, luxury grooming aesthetic, bokeh background with reflections."
+            style="
+              background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAOE_Y8s9vI59KGgKgd5DkpLTkTeiyBMk2rybHyVysFZHrnNRL2V_mjTui3d0qYrj3bNA10e12v8uaEqYjw0uEuQC5dacWevdfZCQ29RmxscnaV7kj4kmhxFmgPTHNYNHMCn37bw3asXKEI1Bu5h--8ihRAXGMqeUjvZkc0cpL_6KU73d0lXlMLsB72UkKKx5HNBaUO3kysa35qzWFTSTJPMNawm6vvtnb-iYwXWfFI8AXTfyAFQiv5&quot;);
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent z-0"
+          ></div>
+          <div
+            class="max-w-[1440px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-12 relative z-10 items-center"
+          >
+            <!-- Left Content -->
+            <div class="lg:col-span-7 space-y-space-8 pt-20">
+              <div
+                class="inline-flex items-center gap-space-2 px-space-4 py-space-2 rounded-full bg-surface-container-high/80 backdrop-blur-md border border-outline-variant/30"
+              >
+                <span
+                  class="w-2 h-2 rounded-full bg-primary animate-pulse"
+                ></span>
+                <span
+                  class="font-label-sm text-primary tracking-widest uppercase"
+                  >Elite Grooming Experience</span
+                >
+              </div>
+              <h1
+                class="font-headline-lg text-on-surface tracking-tight uppercase"
+              >
+                YOUR STYLE.<br />
+                OUR PASSION.<br />
+                <span
+                  class="text-primary normal-case font-serif italic font-normal"
+                  >Your Confidence.</span
+                >
+              </h1>
+              <p class="font-body-lg text-on-surface-variant max-w-xl">
+                Premium haircuts, fades, and grooming crafted for modern men who
+                demand perfection. Experience bespoke styling in an atmosphere
+                of ultimate sophistication.
+              </p>
+              <div class="flex flex-wrap items-center gap-space-6 pt-2">
+                <a
+                  class="px-space-8 py-space-4 bg-primary-container text-on-primary-container font-label-lg rounded-lg hover:shadow-[0_0_32px_rgba(255,122,0,0.5)] transition-all flex items-center gap-space-2"
+                  href="#book"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >event</span
+                  >
+                  BOOK APPOINTMENT
+                </a>
+                <a
+                  class="px-space-8 py-space-4 bg-surface-container-high/80 hover:bg-surface-container-highest text-on-surface font-label-lg rounded-lg backdrop-blur-md transition-all flex items-center gap-space-2"
+                  href="#services"
+                >
+                  OUR SERVICES
+                  <span class="material-symbols-outlined text-[20px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+              <div
+                class="grid grid-cols-2 sm:grid-cols-4 gap-space-6 pt-space-8 border-t border-outline-variant/30"
+              >
+                <div class="flex items-center gap-space-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary"
+                  >
+                    <span class="material-symbols-outlined">content_cut</span>
+                  </div>
+                  <div>
+                    <div class="font-label-lg text-on-surface">Top Barbers</div>
+                    <div class="font-body-sm text-on-surface-variant">
+                      Master Artisans
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-space-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary"
+                  >
+                    <span class="material-symbols-outlined">verified</span>
+                  </div>
+                  <div>
+                    <div class="font-label-lg text-on-surface">Premium</div>
+                    <div class="font-body-sm text-on-surface-variant">
+                      Products Only
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-space-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary"
+                  >
+                    <span class="material-symbols-outlined">bolt</span>
+                  </div>
+                  <div>
+                    <div class="font-label-lg text-on-surface">Clean Vibe</div>
+                    <div class="font-body-sm text-on-surface-variant">
+                      Modern Luxury
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-space-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary"
+                  >
+                    <span class="material-symbols-outlined"
+                      >workspace_premium</span
+                    >
+                  </div>
+                  <div>
+                    <div class="font-label-lg text-on-surface">Guaranteed</div>
+                    <div class="font-body-sm text-on-surface-variant">
+                      100% Satisfaction
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Right Interactive Quick Booking Widget -->
+            <div class="lg:col-span-5">
+              <div
+                class="bg-surface-container/95 backdrop-blur-xl p-space-8 rounded-2xl border border-outline-variant/30 shadow-[0_0_40px_rgba(0,0,0,0.8)] relative"
+              >
+                <div
+                  class="absolute -top-3 right-6 bg-primary-container text-on-primary-container px-space-4 py-1 rounded-full font-label-sm uppercase tracking-wider"
+                >
+                  Fast Booking
+                </div>
+                <h3
+                  class="font-headline-sm text-on-surface mb-space-6 flex items-center gap-space-2"
+                >
+                  <span class="material-symbols-outlined text-primary"
+                    >schedule</span
+                  >
+                  Book Your Time
+                </h3>
+                <form
+                  class="space-y-space-4"
+                  id="quick-booking-form"
+                  onsubmit="
+                    event.preventDefault();
+                    alert('Appointment requested successfully!');
+                  "
+                >
+                  <div>
+                    <label
+                      class="block font-label-md text-on-surface-variant mb-space-2"
+                      >Select Service</label
+                    >
+                    <div class="relative">
+                      <select
+                        class="w-full bg-surface-dim border border-outline-variant/40 rounded-lg px-space-4 py-3 text-on-surface font-body-md appearance-none focus:outline-none focus:border-primary transition-colors"
+                      >
+                        <option>Classic Haircut & Style - $35</option>
+                        <option selected="">Premium Cut & Fade - $55</option>
+                        <option>Ultimate Grooming Package - $80</option>
+                        <option>Beard Sculpting & Trim - $25</option>
+                      </select>
+                      <span
+                        class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none"
+                        >expand_more</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      class="block font-label-md text-on-surface-variant mb-space-2"
+                      >Choose Barber</label
+                    >
+                    <div class="relative">
+                      <select
+                        class="w-full bg-surface-dim border border-outline-variant/40 rounded-lg px-space-4 py-3 text-on-surface font-body-md appearance-none focus:outline-none focus:border-primary transition-colors"
+                      >
+                        <option>Alexander (Senior Barber)</option>
+                        <option>David (Fade Specialist)</option>
+                        <option>Michael (Beard Expert)</option>
+                        <option>James (Style Master)</option>
+                      </select>
+                      <span
+                        class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none"
+                        >expand_more</span
+                      >
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-space-4">
+                    <div>
+                      <label
+                        class="block font-label-md text-on-surface-variant mb-space-2"
+                        >Date</label
+                      >
+                      <div class="relative">
+                        <input
+                          class="w-full bg-surface-dim border border-outline-variant/40 rounded-lg px-space-4 py-3 text-on-surface font-body-md focus:outline-none focus:border-primary transition-colors"
+                          type="text"
+                          value="May 25, 2024"
+                        />
+                        <span
+                          class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]"
+                          >calendar_today</span
+                        >
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        class="block font-label-md text-on-surface-variant mb-space-2"
+                        >Time</label
+                      >
+                      <div class="relative">
+                        <input
+                          class="w-full bg-surface-dim border border-outline-variant/40 rounded-lg px-space-4 py-3 text-on-surface font-body-md focus:outline-none focus:border-primary transition-colors"
+                          type="text"
+                          value="07:00 PM"
+                        />
+                        <span
+                          class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]"
+                          >schedule</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="w-full py-4 mt-space-4 bg-primary-container text-on-primary-container font-label-lg rounded-lg hover:shadow-[0_0_24px_rgba(255,122,0,0.5)] transition-all flex items-center justify-center gap-space-2"
+                    type="submit"
+                  >
+                    BOOK NOW
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                  </button>
+                </form>
+                <div
+                  class="mt-space-6 pt-space-4 border-t border-outline-variant/20 flex items-center justify-between text-body-sm text-on-surface-variant"
+                >
+                  <span>Walk-ins Welcome</span>
+                  <div class="flex items-center gap-space-2">
+                    <div class="flex -space-x-2">
+                      <div
+                        class="w-6 h-6 rounded-full bg-surface-container-high bg-cover border border-surface"
+                        data-alt="Portrait of master barber Alexander"
+                        style="
+                          background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuC10UVxROz1npYtODMARn8-DnZxDGSUJRykQ2CgCPQtTBmFh3fjpl2KXAuPwnLPOBtKyp399puK7oVbYOVd8UjFb54knXYTXah3d5Db1IRIjSHA6gJ_Pd4d2RczF58oa-t2M2ICnOGhA_fqwU9ZFjxdh25TYaRdGveYtKkNZG6Ny_N0NhAxZA1jejDEDVLpdfbFZVENO78lGRgJZ1v2QkDXVqxioImPKPqZjfUiGJ0nFtRiVHWe5p8L&quot;);
+                        "
+                      ></div>
+                      <div
+                        class="w-6 h-6 rounded-full bg-surface-container-high bg-cover border border-surface"
+                        data-alt="Portrait of expert fade specialist David"
+                        style="
+                          background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCQWFb0e2nEKLjkIBnugdjWV7gwzxPGf33MaqqvS8S1Tggc-oDd71ntr7gbzz2S07UjrBQcz0csTXN0-AJ1ysarmUrG7Ja4nhwzZwvupndS_tBeePr7cQGz0lZfHLKS_iLTa05-u15ujRAuLqQrrxlmgSK-uiwmjdvZrpYIp8DowmhkgpdZK5Bg8o6yxBvESEJlCiYjBCDqxOp8xhX1exuwkBz7wiisdf8qpeluVwBiYwPt8KS7b7B0&quot;);
+                        "
+                      ></div>
+                      <div
+                        class="w-6 h-6 rounded-full bg-surface-container-high bg-cover border border-surface"
+                        data-alt="Portrait of beard expert Michael"
+                        style="
+                          background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDgBBnj9iI3lIVqvWao12XEW5NGHo018w7ymttwR2Oc7eNSx6MvvM4YyMYwIbFpej_FGIfvd_Tx1SnuYryfWaEriPvj6DnChI-qAGASEeiYek6aMLBXFCIfAB25ms5vO3OwJu-eOZucNTioPy-DftTtTlBb6RhDkIIRr6VCbTIRwwPwdqq-C-OSEPKshWQbyAFnurmY3dMldzquPyfJzZzmVJx4tvaBopovgAZRLjUL63zKJFsMviwu&quot;);
+                        "
+                      ></div>
+                    </div>
+                    <span class="font-label-sm text-primary">120+ today</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Our Services Category Grid -->
+        <section
+          class="py-space-12 px-gutter-desktop max-w-[1440px] mx-auto w-full"
+          id="services"
+        >
+          <div class="flex items-end justify-between mb-space-8">
+            <div>
+              <span class="font-label-sm text-primary uppercase tracking-widest"
+                >Expert Grooming</span
+              >
+              <h2 class="font-headline-md text-on-surface mt-1">
+                OUR SERVICES
+              </h2>
+            </div>
+            <a
+              class="font-label-md text-primary hover:underline flex items-center gap-1"
+              href="#"
+              >VIEW ALL SERVICES
+              <span class="material-symbols-outlined text-[16px]"
+                >arrow_forward</span
+              ></a
+            >
+          </div>
+          <div
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-space-4"
+          >
+            <!-- Service 1 -->
+            <div
+              class="group bg-surface-container hover:bg-surface-container-high p-space-6 rounded-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-surface-dim text-primary flex items-center justify-center mb-space-4 group-hover:scale-110 transition-transform"
+                >
+                  <span class="material-symbols-outlined text-[28px]"
+                    >content_cut</span
+                  >
+                </div>
+                <h3 class="font-label-lg text-on-surface mb-2">
+                  HAIRCUT & STYLE
+                </h3>
+                <p class="font-body-sm text-on-surface-variant line-clamp-2">
+                  Classic & modern haircuts tailored to your facial structure.
+                </p>
+              </div>
+              <div
+                class="mt-space-6 pt-4 border-t border-outline-variant/10 flex items-center justify-between text-primary font-label-sm"
+              >
+                <span>From $35</span>
+                <span
+                  class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </div>
+            </div>
+            <!-- Service 2 -->
+            <div
+              class="group bg-surface-container hover:bg-surface-container-high p-space-6 rounded-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-surface-dim text-primary flex items-center justify-center mb-space-4 group-hover:scale-110 transition-transform"
+                >
+                  <span class="material-symbols-outlined text-[28px]"
+                    >electric_bolt</span
+                  >
+                </div>
+                <h3 class="font-label-lg text-on-surface mb-2">
+                  FADE SPECIALIST
+                </h3>
+                <p class="font-body-sm text-on-surface-variant line-clamp-2">
+                  Low, Mid, High Fade executed with razor precision.
+                </p>
+              </div>
+              <div
+                class="mt-space-6 pt-4 border-t border-outline-variant/10 flex items-center justify-between text-primary font-label-sm"
+              >
+                <span>From $40</span>
+                <span
+                  class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </div>
+            </div>
+            <!-- Service 3 -->
+            <div
+              class="group bg-surface-container hover:bg-surface-container-high p-space-6 rounded-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-surface-dim text-primary flex items-center justify-center mb-space-4 group-hover:scale-110 transition-transform"
+                >
+                  <span class="material-symbols-outlined text-[28px]"
+                    >face</span
+                  >
+                </div>
+                <h3 class="font-label-lg text-on-surface mb-2">BEARD TRIM</h3>
+                <p class="font-body-sm text-on-surface-variant line-clamp-2">
+                  Shape, trim & design with hot oil conditioning.
+                </p>
+              </div>
+              <div
+                class="mt-space-6 pt-4 border-t border-outline-variant/10 flex items-center justify-between text-primary font-label-sm"
+              >
+                <span>From $25</span>
+                <span
+                  class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </div>
+            </div>
+            <!-- Service 4 -->
+            <div
+              class="group bg-surface-container hover:bg-surface-container-high p-space-6 rounded-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-surface-dim text-primary flex items-center justify-center mb-space-4 group-hover:scale-110 transition-transform"
+                >
+                  <span class="material-symbols-outlined text-[28px]"
+                    >hot_tub</span
+                  >
+                </div>
+                <h3 class="font-label-lg text-on-surface mb-2">
+                  HOT TOWEL SHAVE
+                </h3>
+                <p class="font-body-sm text-on-surface-variant line-clamp-2">
+                  Traditional straight razor shave with aromatherapy towels.
+                </p>
+              </div>
+              <div
+                class="mt-space-6 pt-4 border-t border-outline-variant/10 flex items-center justify-between text-primary font-label-sm"
+              >
+                <span>From $30</span>
+                <span
+                  class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </div>
+            </div>
+            <!-- Service 5 -->
+            <div
+              class="group bg-surface-container hover:bg-surface-container-high p-space-6 rounded-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-surface-dim text-primary flex items-center justify-center mb-space-4 group-hover:scale-110 transition-transform"
+                >
+                  <span class="material-symbols-outlined text-[28px]"
+                    >palette</span
+                  >
+                </div>
+                <h3 class="font-label-lg text-on-surface mb-2">
+                  HAIR COLORING
+                </h3>
+                <p class="font-body-sm text-on-surface-variant line-clamp-2">
+                  Full color & highlights for gray blending or style shifts.
+                </p>
+              </div>
+              <div
+                class="mt-space-6 pt-4 border-t border-outline-variant/10 flex items-center justify-between text-primary font-label-sm"
+              >
+                <span>From $65</span>
+                <span
+                  class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </div>
+            </div>
+            <!-- Service 6 -->
+            <div
+              class="group bg-surface-container hover:bg-surface-container-high p-space-6 rounded-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-surface-dim text-primary flex items-center justify-center mb-space-4 group-hover:scale-110 transition-transform"
+                >
+                  <span class="material-symbols-outlined text-[28px]">spa</span>
+                </div>
+                <h3 class="font-label-lg text-on-surface mb-2">
+                  SCALP TREATMENT
+                </h3>
+                <p class="font-body-sm text-on-surface-variant line-clamp-2">
+                  Healthy hair, healthy you with deep therapeutic massage.
+                </p>
+              </div>
+              <div
+                class="mt-space-6 pt-4 border-t border-outline-variant/10 flex items-center justify-between text-primary font-label-sm"
+              >
+                <span>From $45</span>
+                <span
+                  class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Our Barbers & Immersive Experience Banner -->
+        <section
+          class="py-space-12 px-gutter-desktop max-w-[1440px] mx-auto w-full"
+          id="barbers"
+        >
+          <div class="flex items-end justify-between mb-space-8">
+            <div>
+              <span class="font-label-sm text-primary uppercase tracking-widest"
+                >Master Craftsmen</span
+              >
+              <h2 class="font-headline-md text-on-surface mt-1">OUR BARBERS</h2>
+            </div>
+            <a
+              class="font-label-md text-primary hover:underline flex items-center gap-1"
+              href="#"
+              >MEET THE TEAM
+              <span class="material-symbols-outlined text-[16px]"
+                >arrow_forward</span
+              ></a
+            >
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-8">
+            <!-- Barbers Cards (4 cols) -->
+            <div
+              class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-space-6"
+            >
+              <!-- Barber 1 -->
+              <div
+                class="bg-surface-container rounded-xl overflow-hidden group relative"
+              >
+                <div
+                  class="h-64 bg-cover bg-center"
+                  data-alt="Portrait of Alexander, senior barber with tattooed sleeves, looking confidently at the camera inside an upscale modern barbershop with warm amber lighting."
+                  style="
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAZYtoRI4e4Et4UsmxRox1FwvW_2Tx4oUgerSGlmBt0QkJpB9qyr8wh60MjkED6mqPu0Fw2-ZfCStK3H1wL1Cy33ZADiOMqtiw4Vor202ilBWRoac6CiJdwoyx7KhBGwV2jCJUylsGSgtL9xKYn-f-mTjhZT7dUlHxWuQtibmrgHT3GvagHNNAfe-hSEqoYu8fgaXG2o739bV0S6q3zPu_hIlKfVSZJhl01wbA4TOacpujDPQ9oXhHF&quot;);
+                  "
+                ></div>
+                <div class="p-space-6 flex items-center justify-between">
+                  <div>
+                    <h3 class="font-headline-sm text-on-surface">ALEXANDER</h3>
+                    <p class="font-body-sm text-on-surface-variant">
+                      Senior Barber
+                    </p>
+                  </div>
+                  <a
+                    class="w-10 h-10 rounded-full bg-surface-dim hover:bg-primary hover:text-on-primary-container text-primary flex items-center justify-center transition-colors"
+                    href="#"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >photo_camera</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Barber 2 -->
+              <div
+                class="bg-surface-container rounded-xl overflow-hidden group relative"
+              >
+                <div
+                  class="h-64 bg-cover bg-center"
+                  data-alt="Portrait of David, fade specialist wearing a black cap, focused expression, cinematic warm lighting in a luxury barbershop."
+                  style="
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCkZde4lDVbk0uoIXZU9SZq7XEDpO6xnXE5SKjRqb7CKBMLCYI08XlE2o8kc5Ed3ddj9M7p3RQiq3zzbvNqScyDX8kRO0UAQOcnGYBBC6cF2Y93jo8XpU31ZWYQK4GMEatmmGPvpzHXmNN5bTWmPTnaB38UKMdlAyQ6v7rztVc-XmamL8RM6DTIi3fVAakuYuy_a4MveB7EUbr8M1RRXpg7RHO9TnCOtB6Ix9a-yNx70N29FJRlT4CH&quot;);
+                  "
+                ></div>
+                <div class="p-space-6 flex items-center justify-between">
+                  <div>
+                    <h3 class="font-headline-sm text-on-surface">DAVID</h3>
+                    <p class="font-body-sm text-on-surface-variant">
+                      Fade Specialist
+                    </p>
+                  </div>
+                  <a
+                    class="w-10 h-10 rounded-full bg-surface-dim hover:bg-primary hover:text-on-primary-container text-primary flex items-center justify-center transition-colors"
+                    href="#"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >photo_camera</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Barber 3 -->
+              <div
+                class="bg-surface-container rounded-xl overflow-hidden group relative"
+              >
+                <div
+                  class="h-64 bg-cover bg-center"
+                  data-alt="Portrait of Michael, beard expert with a pristine groomed beard, wearing dark apparel, moody atmosphere."
+                  style="
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDSTY9Cwa80-wckUpAYQNzHFF6oil0hpLlYgB6LM7EcqmmN-L1HzNZkHEue8tnveO-jnbdyOTckr-mQCMK99FEOpSrKvyda76GcB6Ztn3ghqxmmxTYb7L4wa1ks7Yp-r3mc-jKK32WhAC7aT4C2pdeYnAJJcFO0yHhrXkqJpTE3P0yjz-BmSSZhVq_M7c3TFIuLSKYNOqm7SzeRW2qWq-jkm8sXxzsYQv3r_fYQQb2fzVUUA4rVSwFp&quot;);
+                  "
+                ></div>
+                <div class="p-space-6 flex items-center justify-between">
+                  <div>
+                    <h3 class="font-headline-sm text-on-surface">MICHAEL</h3>
+                    <p class="font-body-sm text-on-surface-variant">
+                      Beard Expert
+                    </p>
+                  </div>
+                  <a
+                    class="w-10 h-10 rounded-full bg-surface-dim hover:bg-primary hover:text-on-primary-container text-primary flex items-center justify-center transition-colors"
+                    href="#"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >photo_camera</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Barber 4 -->
+              <div
+                class="bg-surface-container rounded-xl overflow-hidden group relative"
+              >
+                <div
+                  class="h-64 bg-cover bg-center"
+                  data-alt="Portrait of James, style master with sharp haircut, professional poise, luxurious interior backdrop."
+                  style="
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCoLxA8o6F0WxYMpjwEyzZy0INMQA85mgQJ5zPGffBiznJdCDGOD0JkB1OMWvV3nq8R5r8Sfl6T4Jdpwwf8Q6ZOeIeqCd4T0mv0UdwYtg9CfsnDz1osWesstxWgoYRhnhonjwvXBJAKyPMig5GJFbZUc8OQIzUsN7UsLUR8txTrmL3XO7sERsFuNbtJevh-E_6MS1B_MYapI0vH8540ZBrpUf8w99PqAAyXZ8nme3auEZOwfg4gRsse&quot;);
+                  "
+                ></div>
+                <div class="p-space-6 flex items-center justify-between">
+                  <div>
+                    <h3 class="font-headline-sm text-on-surface">JAMES</h3>
+                    <p class="font-body-sm text-on-surface-variant">
+                      Style Master
+                    </p>
+                  </div>
+                  <a
+                    class="w-10 h-10 rounded-full bg-surface-dim hover:bg-primary hover:text-on-primary-container text-primary flex items-center justify-center transition-colors"
+                    href="#"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >photo_camera</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Experience Banner & Stats (6 cols) -->
+            <div
+              class="lg:col-span-6 bg-surface-container rounded-2xl overflow-hidden relative flex flex-col justify-between p-space-8"
+            >
+              <div
+                class="absolute inset-0 bg-cover bg-center z-0 opacity-40"
+                data-alt="Wide shot of luxurious CUTLINE barbershop interior featuring leather chairs, custom neon signs, brass fixtures, and warm atmospheric lighting."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDLEpHzoFbgsZqn3oOrM09eW0dN-ddeQfChuNcaynQaeDMt6OKSZ9vOYWhiSorYsFsb_5B28gBur-T9w4qUa4Fwlq3k5hr0jckeDe1LQ2XmqPpcrd_QRP3v1nm8V2e8i-JcouwyZji8mitjkuEex6l-b16ZAzyBnMBJs5ldICuYGCpN0ugmU5yuDoqZ465aqAbhxtDJS-zL_8Z95wf2ZeUxn1rTw-w01blW_Cc6M-YzxwyUb4fUb_aG&quot;);
+                "
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/60 to-transparent z-0"
+              ></div>
+              <div class="relative z-10 flex justify-end">
+                <div
+                  class="w-16 h-16 rounded-full bg-primary-container/90 backdrop-blur-md flex items-center justify-center text-on-primary-container shadow-[0_0_24px_rgba(255,122,0,0.5)] cursor-pointer hover:scale-105 transition-transform"
+                >
+                  <span
+                    class="material-symbols-outlined text-[32px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >play_arrow</span
+                  >
+                </div>
+              </div>
+              <div class="relative z-10 space-y-space-6 pt-24">
+                <h3 class="font-headline-md text-on-surface">
+                  Not just a haircut.<br />
+                  <span class="text-primary font-serif italic font-normal"
+                    >It's an experience.</span
+                  >
+                </h3>
+                <div
+                  class="grid grid-cols-2 sm:grid-cols-4 gap-space-6 pt-space-6 border-t border-outline-variant/30"
+                >
+                  <div>
+                    <div class="font-headline-md text-primary">5K+</div>
+                    <div class="font-body-sm text-on-surface-variant">
+                      Happy Clients
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-headline-md text-primary">12+</div>
+                    <div class="font-body-sm text-on-surface-variant">
+                      Expert Barbers
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-headline-md text-primary">8K+</div>
+                    <div class="font-body-sm text-on-surface-variant">
+                      Haircuts Done
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-headline-md text-primary">4.9</div>
+                    <div class="font-body-sm text-on-surface-variant">
+                      Rating
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Popular Packages / Pricing Section -->
+        <section
+          class="py-space-12 px-gutter-desktop max-w-[1440px] mx-auto w-full"
+          id="pricing"
+        >
+          <div class="flex items-end justify-between mb-space-8">
+            <div>
+              <span class="font-label-sm text-primary uppercase tracking-widest"
+                >Investment</span
+              >
+              <h2 class="font-headline-md text-on-surface mt-1">
+                POPULAR PACKAGES
+              </h2>
+            </div>
+            <a
+              class="font-label-md text-primary hover:underline flex items-center gap-1"
+              href="#"
+              >VIEW ALL DEALS
+              <span class="material-symbols-outlined text-[16px]"
+                >arrow_forward</span
+              ></a
+            >
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-8">
+            <!-- Classic Cut -->
+            <div
+              class="bg-surface-container rounded-2xl p-space-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2"
+            >
+              <div>
+                <h3 class="font-headline-sm text-on-surface mb-2">
+                  CLASSIC CUT
+                </h3>
+                <div class="flex items-baseline gap-1 my-space-6">
+                  <span class="font-headline-lg text-primary">$35</span>
+                  <span class="font-body-sm text-on-surface-variant"
+                    >/ service</span
+                  >
+                </div>
+                <ul
+                  class="space-y-space-4 font-body-md text-on-surface-variant mb-space-8"
+                >
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Haircut & Style
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Wash & Conditioning
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Professional Styling Product
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Neck Razor Finish
+                  </li>
+                </ul>
+              </div>
+              <a
+                class="w-full py-4 text-center bg-surface-dim hover:bg-surface-container-high text-on-surface font-label-lg rounded-lg transition-colors"
+                href="#book"
+              >
+                BOOK NOW
+              </a>
+            </div>
+            <!-- Premium Cut (Featured with Glowing Border) -->
+            <div
+              class="bg-surface-container rounded-2xl p-space-8 flex flex-col justify-between relative shadow-[0_0_32px_rgba(255,122,0,0.2)] border border-primary/40 transform lg:-translate-y-2"
+            >
+              <div
+                class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-container text-on-primary-container px-space-4 py-1 rounded-full font-label-sm uppercase tracking-wider"
+              >
+                Most Popular
+              </div>
+              <div>
+                <h3 class="font-headline-sm text-on-surface mb-2">
+                  PREMIUM CUT
+                </h3>
+                <div class="flex items-baseline gap-1 my-space-6">
+                  <span class="font-headline-lg text-primary">$55</span>
+                  <span class="font-body-sm text-on-surface-variant"
+                    >/ service</span
+                  >
+                </div>
+                <ul
+                  class="space-y-space-4 font-body-md text-on-surface-variant mb-space-8"
+                >
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Haircut & Fade (Any style)
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Beard Trim & Lineup
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Hot Towel Treatment
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Premium Grooming Products
+                  </li>
+                </ul>
+              </div>
+              <a
+                class="w-full py-4 text-center bg-primary-container text-on-primary-container font-label-lg rounded-lg hover:shadow-[0_0_24px_rgba(255,122,0,0.5)] transition-all"
+                href="#book"
+              >
+                BOOK NOW
+              </a>
+            </div>
+            <!-- Ultimate Cut -->
+            <div
+              class="bg-surface-container rounded-2xl p-space-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2"
+            >
+              <div>
+                <h3 class="font-headline-sm text-on-surface mb-2">ULTIMATE</h3>
+                <div class="flex items-baseline gap-1 my-space-6">
+                  <span class="font-headline-lg text-primary">$80</span>
+                  <span class="font-body-sm text-on-surface-variant"
+                    >/ service</span
+                  >
+                </div>
+                <ul
+                  class="space-y-space-4 font-body-md text-on-surface-variant mb-space-8"
+                >
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Haircut & Fade
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Beard Design & Hot Oil
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Hot Towel Shave
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[18px]"
+                      >check</span
+                    >
+                    Scalp Treatment & Massage
+                  </li>
+                </ul>
+              </div>
+              <a
+                class="w-full py-4 text-center bg-surface-dim hover:bg-surface-container-high text-on-surface font-label-lg rounded-lg transition-colors"
+                href="#book"
+              >
+                BOOK NOW
+              </a>
+            </div>
+          </div>
+        </section>
+        <!-- Gallery Section -->
+        <section
+          class="py-space-12 px-gutter-desktop max-w-[1440px] mx-auto w-full"
+          id="gallery"
+        >
+          <div class="flex items-end justify-between mb-space-8">
+            <div>
+              <span class="font-label-sm text-primary uppercase tracking-widest"
+                >Visual Portfolio</span
+              >
+              <h2 class="font-headline-md text-on-surface mt-1">GALLERY</h2>
+            </div>
+            <a
+              class="font-label-md text-primary hover:underline flex items-center gap-1"
+              href="#"
+              >VIEW FULL GALLERY
+              <span class="material-symbols-outlined text-[16px]"
+                >arrow_forward</span
+              ></a
+            >
+          </div>
+          <div
+            class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-space-4"
+          >
+            <div
+              class="col-span-2 md:col-span-2 lg:col-span-3 h-80 rounded-xl overflow-hidden group relative"
+            >
+              <div
+                class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                data-alt="Wide atmospheric shot of the luxury barbershop with illuminated styling stations, leather chairs, and polished hardwood floors."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAEheD5ibRlt95Ni0HQ3YRPc9dHMoE5v5NHjNfbaOOyKw-2bEkkqzmBWucQfN6JMcllyn9hepvTGZUM04xthU96E0soTmFTgc0tVA2QKoBgtE0QaDHXDBAgYJO7sP-fc_VbFfOhBGcVeelOfldlwNblb9WMl5KTkkVhWpZU5O9RmegZIN6HldDd2ZdPNe6NgZ2uui8zLlNXX_q4fc-Bun-11_ttJUquxnYGx9LtnUTzPVOcxs5fG4gU&quot;);
+                "
+              ></div>
+            </div>
+            <div class="h-80 rounded-xl overflow-hidden group relative">
+              <div
+                class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                data-alt="Close up of a professional barber performing a clean sharp fade with hair clippers and guards."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBV7k_W7049nYcl2ag01ar6fp7TEH95xojC7iMbntEHPzVEZwNo-SeZ4A5QUx_06uEnAoNyR7DpAD5I7CfjpcP5EAmXPyq-VY5Rw5bwSrlpAUA08EQOqOxP71ZKcZ5LJcBVxurZ1ULR3jj4V4DNwKAe2RxRvvG_AQlqcYU_hDsFheVuXCaqLFyMYJQ52Eo0UhrI_QxMHPMXbpdAYyn1gLrQOSTDiCh_IxmrTXiB3LU9gvKHVClecT6b&quot;);
+                "
+              ></div>
+            </div>
+            <div class="h-80 rounded-xl overflow-hidden group relative">
+              <div
+                class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                data-alt="Close up of a straight razor shave on a client's neck with white lather."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBycFXg-7df3g_IMA99YhSykYuubfS0LBXQlB8BkZWO-XJTyDbgpQy6K4Fs5TtkJftJnmDLea_vGkAfoBnmySiQl12LSInND3aopzRvqFhlqXw7XxCCxf61lm7nI1kw3y0NUr_A6mpGJgdPmF7Z9ZtFNik-hst9S9XAhFJEO-FpM4DPHmq4VqD6a3Of9148ykX4lqUXhgNNDI0g88KD-S10_3XKZq3FagZ1cTVxGSmnofwmeUltBwrz&quot;);
+                "
+              ></div>
+            </div>
+            <div class="h-80 rounded-xl overflow-hidden group relative">
+              <div
+                class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                data-alt="Stylish client with a fresh pompadour hairstyle looking into a mirror."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDTpH3jW6ViLbH9c5_L51loDA0AjutZY2tPlZkJZ9ixY6pX9JTbrS7rFFt9aCpOLouymGKmjDMjcctvPK7GP5QngqjCC5jN6DPMpcGDt2jzInfRJbWTKgP-CvWZsrQA3ZOOFVYBDUfNQuqMzzd-YVqqPxUN_mioZXjx3rVPsI7u4OIkg8QkwK-HjYmJy6K54CRykAdxSNICu549mZ9ZCM-BU5ZeEyh1RqDIOxX74S5g_fL452FC0RVO&quot;);
+                "
+              ></div>
+            </div>
+            <div class="h-80 rounded-xl overflow-hidden group relative">
+              <div
+                class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                data-alt="Beard trimming session with precision scissors and comb in an upscale grooming studio."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCq2aSVEfY5wMwct9k2hkDd7l0ZomKSmxrCcgNZKJBuWufbvCw6hd5KpdOHaB3otgISujC7el6qN2K4LNAdGbgUsIPOjHfssv8XLLnNveKsOS2Ppy_Og3n2DwPYBA3CLmHf_bo-fEJVEi5x9hLOaQm341aGLeECORG7TXn1p9h4sz4Ba6UlbabYNmaEpynYHDx1ETBXFXk55UWITg3OGCwx35-Dg87XA8tEv7jTVL1i9M0k4uzg9erl&quot;);
+                "
+              ></div>
+            </div>
+            <div class="h-80 rounded-xl overflow-hidden group relative">
+              <div
+                class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                data-alt="Detailed shot of high-end grooming pomades and oils displayed on a wooden shelf with amber lighting."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBYVORZp5axRaOi2ED-u3mrMAR8Xf_iQPHlROy8TfcUPzddrvAmDzOmMyfZxN_DJUXWiAg9EDdjbVxNj2szrwpGibmge7ytgqyQ18l5i2TWbeAlj851X-0Q8AWW8pFGQr5LkwLkY9DhRpbeXrpURAskzjNn-Ymy4Uk4C1h_v-VUzZA65lYMesy0OdrVmL48uh7lJxJcSK9wQzwAj-OxZ2oNZcT61xUYkcNmWddd0uqVnC-NJk_b2OZf&quot;);
+                "
+              ></div>
+            </div>
+          </div>
+        </section>
+        <!-- What Our Clients Say (Testimonials) -->
+        <section
+          class="py-space-12 px-gutter-desktop max-w-[1440px] mx-auto w-full"
+          id="about"
+        >
+          <div class="flex items-end justify-between mb-space-8">
+            <div>
+              <span class="font-label-sm text-primary uppercase tracking-widest"
+                >Testimonials</span
+              >
+              <h2 class="font-headline-md text-on-surface mt-1">
+                WHAT OUR CLIENTS SAY
+              </h2>
+            </div>
+            <a
+              class="font-label-md text-primary hover:underline flex items-center gap-1"
+              href="#"
+              >VIEW ALL REVIEWS
+              <span class="material-symbols-outlined text-[16px]"
+                >arrow_forward</span
+              ></a
+            >
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-8">
+            <!-- Testimonial 1 -->
+            <div
+              class="bg-surface-container p-space-8 rounded-2xl flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex gap-1 text-primary mb-space-4">
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                </div>
+                <p class="font-body-lg text-on-surface mb-space-6 italic">
+                  "Best barber shop in town! Always leave the shop feeling like
+                  a new man."
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-space-4 pt-4 border-t border-outline-variant/20"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-cover bg-center"
+                  data-alt="Portrait of satisfied client Daniel K."
+                  style="
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuArBzrXmuZd1a0t8NmWGtdQhhIYOYvyyxONZ9PgpbIzyMhELdH7voryaqP1L8JOiAeFUcowZUv7U6mvQyp6IcsSeMwciOQeqLJ5P8dDtnVLHqvmXIHBQczZ2GrHz7Pfpq0Cbj9jRxywqjqX3Qphgq7bUkLH67L-jO8IiURwmO6DucoEgWVYP4LN5A1DMiKykC0DZMzRrVs7k6kjCcsCU8SafDe7NZeUe6hf0LtGQPjPNb9gENYFwoYa&quot;);
+                  "
+                ></div>
+                <div>
+                  <div class="font-label-lg text-on-surface">Daniel K.</div>
+                  <div class="font-body-sm text-on-surface-variant">
+                    Verified Client
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Testimonial 2 -->
+            <div
+              class="bg-surface-container p-space-8 rounded-2xl flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex gap-1 text-primary mb-space-4">
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                </div>
+                <p class="font-body-lg text-on-surface mb-space-6 italic">
+                  "The attention to detail is unmatched. Highly recommended!"
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-space-4 pt-4 border-t border-outline-variant/20"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-cover bg-center"
+                  data-alt="Portrait of satisfied client Matthew R."
+                  style="
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuChpBM-hDAPQu3_7FvayboGR3aePlL93z7Og432mLz2G3w0TMXupeN0ocrcvvfVjadnlKnTp0fQsIsoni-dpbUYwCCXfGRoeBM9-rFT10Qd50QvKLgt1RvZvVXUZAAlOoZq3B1_FtI_XfWVMVrXNNgNZ5kZfnSwiw5UeQfsictKkIkHNs5d60rGP3qgk3q52rJKHY3HRMpBt35yYybbXJ7JSoMPw4sKq2cZBarAmezfEZlyUuA4DMix&quot;);
+                  "
+                ></div>
+                <div>
+                  <div class="font-label-lg text-on-surface">Matthew R.</div>
+                  <div class="font-body-sm text-on-surface-variant">
+                    Verified Client
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Testimonial 3 -->
+            <div
+              class="bg-surface-container p-space-8 rounded-2xl flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex gap-1 text-primary mb-space-4">
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                </div>
+                <p class="font-body-lg text-on-surface mb-space-6 italic">
+                  "Professional, clean and amazing vibe. My go-to barbershop."
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-space-4 pt-4 border-t border-outline-variant/20"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-cover bg-center"
+                  data-alt="Portrait of satisfied client Ryan T."
+                  style="
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuB5_fW9isD5GxldqpPSo42V47mY1MT6a52TGnCVXefvIcFwd-eQz2BVT8aZV0D1vcEya9cCWHHhmiBGLKmyyHuLf7KpFMX0RmOkswsNq7Z7cQtoiR4gqgu8XmYQB6NaTLjBCvYMrXHw49-BcxatJhUHBF9Z2a2Xdi6gjOaZwU-72UXReQVvBCMFgJvW7FseT3V6IJnIwMSUGZi3LWQjYzOfm8_c189mHpgbzFvgTLoUbUQeU97SckwG&quot;);
+                  "
+                ></div>
+                <div>
+                  <div class="font-label-lg text-on-surface">Ryan T.</div>
+                  <div class="font-body-sm text-on-surface-variant">
+                    Verified Client
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Find Us & Ready for Next Look Section -->
+        <section
+          class="py-space-12 px-gutter-desktop max-w-[1440px] mx-auto w-full mb-space-12"
+          id="contact"
+        >
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-8">
+            <!-- Ready for your next look banner (6 cols) -->
+            <div
+              class="lg:col-span-6 bg-surface-container rounded-2xl p-space-8 relative overflow-hidden flex flex-col justify-between"
+            >
+              <div
+                class="absolute inset-0 bg-cover bg-center opacity-40 z-0"
+                data-alt="Confident man with modern haircut and stylish jacket posing in an industrial urban setting."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBdq_JEPZA7giXTxhjRqiEJKHfQf4CqDmXe1dw83ijxYgNkoDDhVpz3BaPpJoLzighc8tdupSDBfLjiw--FN0IV_NP6L7j2h6xRncXY43kOYSHkL0v-CeGjKUL2hQoT6jN81uX2sCErGnQd1Oe_-dUwms_iXVuwV13KfXaGXIVpM4qRJLZIzBEuL-F8i2Ch4dG2zGoJuM0aWQ9AKNFCIt5ilXuJH1KTHG1WjqtGKvuAZKyglIC_Ybir&quot;);
+                "
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-surface-container via-surface-container/80 to-transparent z-0"
+              ></div>
+              <div class="relative z-0 space-y-space-4 pt-8">
+                <span
+                  class="font-label-sm text-primary uppercase tracking-widest"
+                  >Book Your Visit</span
+                >
+                <h2 class="font-headline-md text-on-surface">
+                  Ready for your<br />next look?
+                </h2>
+                <p class="font-body-md text-on-surface-variant max-w-sm">
+                  Book your appointment now and elevate your style with our
+                  master barbers.
+                </p>
+              </div>
+              <div class="relative z-0 pt-12">
+                <a
+                  class="inline-flex items-center gap-space-2 px-space-8 py-4 bg-primary-container text-on-primary-container font-label-lg rounded-lg hover:shadow-[0_0_24px_rgba(255,122,0,0.5)] transition-all"
+                  href="#book"
+                >
+                  BOOK APPOINTMENT
+                  <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+            <!-- Find Us / Map Section (6 cols) -->
+            <div
+              class="lg:col-span-6 bg-surface-container rounded-2xl p-space-8 flex flex-col justify-between"
+            >
+              <div>
+                <h3 class="font-headline-sm text-on-surface mb-space-4">
+                  FIND US
+                </h3>
+                <p class="font-body-md text-on-surface-variant mb-space-4">
+                  123 Barber Street, Los Angeles, CA 90001
+                </p>
+                <div
+                  class="space-y-space-2 font-body-sm text-on-surface-variant mb-space-6"
+                >
+                  <div class="flex justify-between">
+                    <span>Mon - Fri</span>
+                    <span class="text-on-surface">10:00 AM - 9:00 PM</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Sat - Sun</span>
+                    <span class="text-on-surface">9:00 AM - 8:00 PM</span>
+                  </div>
+                  <div class="flex justify-between pt-2">
+                    <span>Phone</span>
+                    <span class="text-primary">+1 (213) 555-0199</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Email</span>
+                    <span class="text-primary">info@cutlinebarbershop.com</span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-full h-48 bg-cover bg-center rounded-xl relative overflow-hidden"
+                data-location="Los Angeles, CA"
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBI6zGV0F2HuDtnhPtiOTTeR14wb_3lNkStnFD2K8qrKcfW7Fb3L42OMNMMJNX5KodnZflSaxbPlf7zdZ-RZb0usbh9DlUB7ihGNvfZl8-IgbQ1LRgpkyYoU45JfwVmCo8P-A4RJ6uUOrWdvBxiyHELegATWkSOCK4RkqZdcmNllscnrk9Pk7wAdqSeyPZcwHqnlvdtkQMKiA1D5MtikBBciTqp8n45Jdu7T5IjrH-DfFSvjTMo2gPa&quot;);
+                "
+              >
+                <div class="absolute inset-0 bg-surface/20 flex items-end p-4">
+                  <a
+                    class="w-full py-2 bg-surface-dim/90 hover:bg-surface-dim text-on-surface font-label-md rounded-lg text-center backdrop-blur-md transition-colors"
+                    href="#"
+                  >
+                    GET DIRECTIONS
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer
+      class="w-full bg-surface-container-lowest border-t border-outline-variant/30 py-space-12"
+    >
+      <div
+        class="max-w-[1440px] mx-auto px-gutter-desktop grid grid-cols-1 md:grid-cols-4 gap-space-8 mb-space-12"
+      >
+        <div class="space-y-space-4">
+          <div class="flex items-center gap-space-4">
+            <img
+              alt="Cutline Logo"
+              class="h-6 w-auto object-contain"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY8bHso0I4rENJyHT3LhkXXdJ_77ZXvLY9cBfD2HeQ2iYbczCvPa_Ul9Sa7Kh8IgCAuQG8cZb_bnlSLL7Sbq7LLv2t6pIDOUrpPPwg77o9zn0zE9kh-gQw92GwOPHmmfO4e_2TXjlHu7pGOzxFTUDXeVtf-5qBS_9OXIYCCfUa62IVeccWufvoLuBSIxIpkRepNxrc-qeu0ABGwhiI9OOQQvhh7glhmkhaxVYuu0BgWYQkme-N-LZx"
+            /><span class="font-headline-sm text-primary">CUTLINE</span>
+          </div>
+          <p class="font-body-sm text-on-surface-variant">
+            The pinnacle of modern grooming and elite styling experiences.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-label-lg text-on-surface mb-space-4">Navigation</h4>
+          <ul class="space-y-space-2 font-body-sm text-on-surface-variant">
+            <li>
+              <a class="hover:text-primary transition-colors" href="#"
+                >Services & Pricing</a
+              >
+            </li>
+            <li>
+              <a class="hover:text-primary transition-colors" href="#"
+                >Meet the Barbers</a
+              >
+            </li>
+            <li>
+              <a class="hover:text-primary transition-colors" href="#"
+                >Gallery</a
+              >
+            </li>
+            <li>
+              <a class="hover:text-primary transition-colors" href="#"
+                >Book Appointment</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-label-lg text-on-surface mb-space-4">Hours</h4>
+          <ul class="space-y-space-2 font-body-sm text-on-surface-variant">
+            <li>Mon - Fri: 9am - 8pm</li>
+            <li>Saturday: 8am - 7pm</li>
+            <li>Sunday: 10am - 5pm</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-label-lg text-on-surface mb-space-4">Location</h4>
+          <p class="font-body-sm text-on-surface-variant mb-space-2">
+            123 Luxury Ave, Suite 400<br />Metropolis, NY 10001
+          </p>
+          <p class="font-body-sm text-primary">concierge@cutlinebarbers.com</p>
+        </div>
+      </div>
+      <div
+        class="max-w-[1440px] mx-auto px-gutter-desktop pt-space-8 border-t border-outline-variant/20 flex flex-col md:flex-row items-center justify-between font-body-sm text-on-surface-variant"
+      >
+        <div class="flex flex-col sm:flex-row sm:items-center gap-space-2">
+          <p>© 2024 Cutline Barbershop. All rights reserved.</p>
+          <span class="hidden sm:inline text-outline-variant">|</span>
+          <p>
+            Crafted & Conceptualized by
+            <a
+              class="text-primary hover:underline font-label-md"
+              data-path="about-project"
+              href="https://sites.google.com/view/craft-ideas-studio/home"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Craft Idea's Studio</a
+            >
+          </p>
+        </div>
+        <div class="flex gap-space-6 mt-space-4 md:mt-0">
+          <a class="hover:text-primary" href="#">Privacy Policy</a
+          ><a class="hover:text-primary" href="#">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Mobile Navigation Menu with Accessibility
+      (function () {
+        const menuBtn = document.getElementById("mobile-menu-btn");
+        const menuClose = document.getElementById("mobile-menu-close");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileOverlay = document.getElementById("mobile-overlay");
+        const menuIcon = document.getElementById("menu-icon");
+        const body = document.body;
+        let lastFocusedElement = null;
+        let focusableElements = [];
+        function getFocusableElements() {
+          return mobileMenu.querySelectorAll(
+            'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          );
+        }
+
+        function openMenu() {
+          lastFocusedElement = document.activeElement;
+          mobileMenu.classList.remove("translate-x-full");
+          mobileMenu.classList.remove(
+            "-translate-y-2",
+            "opacity-0",
+            "pointer-events-none",
+          );
+          mobileMenu.classList.add("mobile-menu-enter");
+          mobileOverlay.classList.remove("hidden");
+          mobileOverlay.classList.add("mobile-overlay-enter");
+          menuBtn.setAttribute("aria-expanded", "true");
+          mobileOverlay.setAttribute("aria-hidden", "false");
+          mobileMenu.setAttribute("aria-hidden", "false");
+          menuIcon.textContent = "close";
+          body.style.overflow = "hidden";
+
+          // Update focusable elements and trap focus
+          focusableElements = getFocusableElements();
+          if (focusableElements.length > 0) {
+            focusableElements[0].focus();
+          }
+
+          // Add focus trap
+          document.addEventListener("keydown", handleKeyDown);
+        }
+
+        function closeMenu() {
+          mobileMenu.classList.remove("mobile-menu-enter");
+          mobileMenu.classList.add("mobile-menu-leave");
+          mobileOverlay.classList.remove("mobile-overlay-enter");
+          mobileOverlay.classList.add("mobile-overlay-leave");
+          menuBtn.setAttribute("aria-expanded", "false");
+          mobileOverlay.setAttribute("aria-hidden", "true");
+          menuIcon.textContent = "menu";
+          body.style.overflow = "";
+          mobileMenu.setAttribute("aria-hidden", "true");
+
+          // Remove focus trap
+          document.removeEventListener("keydown", handleKeyDown);
+
+          setTimeout(() => {
+            mobileMenu.classList.add("translate-x-full");
+            mobileMenu.classList.add(
+              "-translate-y-2",
+              "opacity-0",
+              "pointer-events-none",
+            );
+            mobileMenu.classList.remove("mobile-menu-leave");
+            mobileOverlay.classList.add("hidden");
+            mobileOverlay.classList.remove("mobile-overlay-leave");
+            // Restore focus to hamburger button
+            if (lastFocusedElement) {
+              lastFocusedElement.focus();
+            }
+          }, 200);
+        }
+
+        function handleKeyDown(e) {
+          if (e.key === "Escape") {
+            closeMenu();
+            return;
+          }
+
+          if (e.key === "Tab") {
+            focusableElements = getFocusableElements();
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.shiftKey && document.activeElement === firstElement) {
+              e.preventDefault();
+              lastElement.focus();
+            } else if (!e.shiftKey && document.activeElement === lastElement) {
+              e.preventDefault();
+              firstElement.focus();
+            }
+          }
+
+          // Arrow key navigation
+          if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+            e.preventDefault();
+            focusableElements = getFocusableElements();
+            const currentIndex = Array.from(focusableElements).indexOf(
+              document.activeElement,
+            );
+            if (currentIndex === -1) return;
+
+            let nextIndex;
+            if (e.key === "ArrowDown") {
+              nextIndex = (currentIndex + 1) % focusableElements.length;
+            } else {
+              nextIndex =
+                (currentIndex - 1 + focusableElements.length) %
+                focusableElements.length;
+            }
+            focusableElements[nextIndex].focus();
+          }
+        }
+
+        menuBtn.addEventListener("click", openMenu);
+        menuClose.addEventListener("click", closeMenu);
+        mobileOverlay.addEventListener("click", closeMenu);
+
+        // Close menu when clicking a link
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", closeMenu);
+        });
+
+        // Handle resize
+        window.addEventListener("resize", () => {
+          if (
+            window.innerWidth >= 1024 &&
+            !mobileMenu.classList.contains("translate-x-full")
+          ) {
+            closeMenu();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
